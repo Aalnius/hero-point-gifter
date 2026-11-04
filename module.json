@@ -1,0 +1,31 @@
+{
+  "id": "hero-point-gifter",
+  "title": "Hero Point Gifter",
+  "description": "Adds a Hero Points tab to the sidebar. Players gift one hero point per session, and the GM runs sessions, timed divine grants and manual hero point adjustments.",
+  "version": "1.0.0",
+  "authors": [
+    { "name": "Aalnius", "url": "https://github.com/Aalnius" }
+  ],
+  "url": "https://github.com/Aalnius/hero-point-gifter",
+  "manifest": "https://github.com/Aalnius/hero-point-gifter/releases/latest/download/module.json",
+  "download": "https://github.com/Aalnius/hero-point-gifter/releases/download/v1.0.0/module.zip",
+  "readme": "https://github.com/Aalnius/hero-point-gifter#readme",
+  "bugs": "https://github.com/Aalnius/hero-point-gifter/issues",
+  "changelog": "https://github.com/Aalnius/hero-point-gifter/blob/main/CHANGELOG.md",
+  "license": "https://github.com/Aalnius/hero-point-gifter/blob/main/LICENSE",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [
+      { "id": "pf2e", "type": "system", "compatibility": { "verified": "8.6.1" } }
+    ]
+  },
+  "esmodules": ["scripts/main.mjs"],
+  "styles": ["styles/hero-point-gifter.css"],
+  "languages": [
+    { "lang": "en", "name": "English", "path": "lang/en.json" }
+  ],
+  "socket": true
+}

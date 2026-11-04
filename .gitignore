@@ -1,0 +1,21 @@
+# Release builds (CI creates these)
+module.zip
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+
+# Node tooling, if added later
+node_modules/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Logs
+*.log

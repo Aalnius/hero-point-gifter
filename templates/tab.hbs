@@ -1,0 +1,86 @@
+<header class="hpg-header">
+  <h3 class="hpg-title"><span class="hpg-icon">✦</span> {{localize "HPG.Title"}}</h3>
+  <span class="hpg-badge {{#if session.active}}active{{/if}}">{{statusLabel}}</span>
+</header>
+
+{{#if isGM}}
+  <div class="hpg-actions">
+    <button type="button" data-action="startSession">
+      <i class="fa-solid fa-play"></i> {{localize "HPG.Session.Start"}}
+    </button>
+    <button type="button" data-action="endSession" {{#unless session.active}}disabled{{/unless}}>
+      <i class="fa-solid fa-stop"></i> {{localize "HPG.Session.End"}}
+    </button>
+    <button type="button" class="hpg-icon-button" data-action="setSessionNumber"
+      data-tooltip="{{localize 'HPG.Session.Set'}}" aria-label="{{localize 'HPG.Session.Set'}}">
+      <i class="fa-solid fa-pen"></i>
+    </button>
+  </div>
+{{else if session.active}}
+  <p class="hpg-own-status {{#if ownGifted}}gifted{{/if}}">
+    {{#if ownGifted}}{{localize "HPG.Gift.Gifted"}} ✓{{else}}{{localize "HPG.Gift.NotGifted"}}{{/if}}
+  </p>
+{{/if}}
+
+<ul class="hpg-players">
+  {{#each players}}
+    <li class="hpg-player {{#unless online}}offline{{/unless}} {{#if @root.isGM}}gm{{/if}}">
+      <div class="hpg-player-name">
+        <span class="hpg-dot {{#if online}}online{{/if}}"></span>
+        <strong>{{character}}</strong>
+        <span class="hpg-username">({{name}})</span>
+      </div>
+      <div class="hpg-pips" aria-label="{{value}}/{{max}}">
+        {{#each pips}}<span class="hpg-pip {{#if filled}}filled{{/if}}">✦</span>{{/each}}
+      </div>
+        <div class="hpg-player-action">
+        {{#if @root.isGM}}
+          <span class="hpg-gift-badge {{#if gifted}}used{{/if}}">
+            {{#if gifted}}{{localize "HPG.Gift.Gifted"}} ✓{{else}}{{localize "HPG.Gift.NotGifted"}}{{/if}}
+          </span>
+          <button type="button" class="hpg-icon-button" data-action="resetGift" data-user-id="{{id}}"
+            data-tooltip="{{localize 'HPG.Gift.Reset' name=name}}" aria-label="{{localize 'HPG.Gift.Reset' name=name}}">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+          <button type="button" class="hpg-icon-button" data-action="takeHeroPoint" data-user-id="{{id}}"
+            data-tooltip="{{localize 'HPG.Gm.Take' name=character}}" aria-label="{{localize 'HPG.Gm.Take' name=character}}"
+            {{#unless value}}disabled{{/unless}}>
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <button type="button" class="hpg-icon-button" data-action="giveHeroPoint" data-user-id="{{id}}"
+            data-tooltip="{{localize 'HPG.Gm.Give' name=character}}" aria-label="{{localize 'HPG.Gm.Give' name=character}}"
+            {{#if atMax}}disabled{{/if}}>
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        {{else if showGift}}
+          <button type="button" class="hpg-icon-button" data-action="gift" data-user-id="{{id}}"
+            data-tooltip="{{giftTip}}" aria-label="{{giftTip}}" {{#unless canGift}}disabled{{/unless}}>
+            <i class="fa-solid fa-gift"></i>
+          </button>
+        {{/if}}
+      </div>
+    </li>
+  {{else}}
+    <li class="hpg-empty">{{localize "HPG.Table.NoPlayers"}}</li>
+  {{/each}}
+</ul>
+
+{{#if nextGrantAt}}
+  <p class="hpg-countdown">
+    {{localize "HPG.Session.NextGrant"}} <strong data-countdown="{{nextGrantAt}}"></strong>
+  </p>
+{{else if timerPaused}}
+  <p class="hpg-countdown">{{localize "HPG.Session.TimerPaused"}}</p>
+{{/if}}
+
+<section class="hpg-log">
+  <h4>{{localize "HPG.Log.Title"}}</h4>
+  {{#each log}}
+    <div class="hpg-log-entry">
+      <span class="hpg-log-time">{{time}}</span>
+      <span><strong>{{giver}}</strong> → <strong>{{recipient}}</strong>{{#if reason}}: <em>{{reason}}</em>{{/if}}</span>
+    </div>
+  {{else}}
+    <p class="hpg-empty">{{localize "HPG.Log.Empty"}}</p>
+  {{/each}}
+</section>

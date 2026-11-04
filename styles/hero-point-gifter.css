@@ -1,0 +1,243 @@
+/* Hero Point Gift — uses core theme variables where possible, gold accents for the hero point motif. */
+
+.hero-points,
+.hpg-card {
+  --hpg-gold: #f0c040;
+  --hpg-gold-dim: #8b6914;
+  --hpg-pip-empty: color-mix(in srgb, var(--color-text-primary) 25%, transparent);
+}
+
+/* ---------- Sidebar tab ---------- */
+
+.heroPoints-sidebar.active,
+.hero-points .window-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 0.75rem;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+.hpg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--hpg-gold-dim);
+}
+
+.hpg-title {
+  margin: 0;
+  border: none;
+  font-size: var(--font-size-18);
+  color: var(--hpg-gold);
+}
+
+.hpg-badge {
+  padding: 2px 10px;
+  border: 1px solid var(--color-warm-3, #6b4020);
+  border-radius: 20px;
+  font-size: var(--font-size-12);
+  white-space: nowrap;
+}
+
+.hpg-badge.active {
+  border-color: #4a8a30;
+  color: #88d060;
+  background: rgb(80 160 60 / 0.15);
+}
+
+.hpg-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hpg-actions button:not(.hpg-icon-button) {
+  flex: 1;
+  padding-inline: 0.4rem;
+  white-space: nowrap;
+}
+
+.hpg-own-status {
+  margin: 0;
+  font-size: var(--font-size-12);
+  font-style: italic;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.hpg-own-status.gifted {
+  color: #88d060;
+}
+
+.hpg-players {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hpg-player {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--hpg-gold-dim) 40%, transparent);
+}
+
+.hpg-player.offline {
+  opacity: 0.55;
+}
+
+.hpg-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #604030;
+}
+
+.hpg-dot.online {
+  background: #60c040;
+  box-shadow: 0 0 5px #60c040;
+}
+
+.hpg-username {
+  font-size: var(--font-size-11);
+  color: var(--color-text-secondary);
+}
+
+.hpg-pip {
+  color: var(--hpg-pip-empty);
+}
+
+.hpg-pip.filled {
+  color: var(--hpg-gold);
+  text-shadow: 0 0 6px rgb(240 192 64 / 0.6);
+}
+
+.hpg-player.gm {
+  grid-template-columns: 1fr auto;
+}
+
+.hpg-player.gm .hpg-player-action {
+  grid-column: 1 / -1;
+}
+
+.hpg-player-action {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 1.75rem;
+  justify-content: flex-end;
+}
+
+.hpg-gift-badge {
+  padding: 1px 7px;
+  border: 1px solid var(--hpg-gold-dim);
+  border-radius: 10px;
+  font-size: var(--font-size-11);
+  color: var(--color-text-secondary);
+}
+
+.hpg-gift-badge.used {
+  border-color: #4a8a30;
+  color: #88d060;
+}
+
+.hpg-icon-button {
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.hpg-countdown {
+  margin: 0;
+  font-size: var(--font-size-12);
+  font-style: italic;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.hpg-log h4 {
+  margin: 0 0 0.25rem;
+  font-size: var(--font-size-11);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hpg-gold-dim);
+  border: none;
+}
+
+.hpg-log-entry {
+  display: flex;
+  gap: 0.5rem;
+  padding: 2px 0;
+  font-size: var(--font-size-12);
+}
+
+.hpg-log-time {
+  flex: 0 0 auto;
+  color: var(--color-text-secondary);
+}
+
+.hpg-empty {
+  margin: 0;
+  font-size: var(--font-size-12);
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Gift dialog ---------- */
+
+.hpg-dialog-hint {
+  margin: 0 0 0.5rem;
+  font-size: var(--font-size-12);
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Chat cards ---------- */
+
+.hpg-card {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--hpg-gold-dim);
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1c1410, #2a1f14);
+  color: #e8d5a0;
+  text-align: center;
+}
+
+.hpg-card-icon {
+  font-size: 1.6em;
+  color: var(--hpg-gold);
+  filter: drop-shadow(0 0 8px rgb(240 192 64 / 0.7));
+}
+
+.hpg-card-title {
+  margin: 0.25rem 0 0.5rem;
+  border: none;
+  font-size: 1.1em;
+  letter-spacing: 0.06em;
+  color: var(--hpg-gold);
+}
+
+.hpg-card-body {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.hpg-card-note {
+  margin: 0.4rem 0 0;
+  font-size: 0.88em;
+  color: #c9a84c;
+}
