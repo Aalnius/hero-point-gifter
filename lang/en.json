@@ -78,7 +78,9 @@
       "EndOnExitName": "End Session When GM Leaves",
       "EndOnExitHint": "End the running session once the last GM has left. It is applied the next time a GM loads in, and reloading the page does not count as leaving.",
       "DivineReasonsName": "Reasons For Divine Grants",
-      "DivineReasonsHint": "Add a random funny or god-themed reason to the chat card when the Gods grant hero points on the timer."
+      "DivineReasonsHint": "Add a random funny or god-themed reason to the chat card when the Gods grant hero points on the timer.",
+      "DivineGrantsName": "Enable Divine Grants",
+      "DivineGrantsHint": "While a session is active, the Gods grant hero points to random players on a timer. Turn this off to disable the timer and its countdown."
     },
     "Gm": {
       "Give": "Give {name} a hero point",

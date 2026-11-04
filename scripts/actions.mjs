@@ -1,7 +1,7 @@
 import { postCard, nameList } from "./chat.mjs";
 import { MODULE_ID } from "./constants.mjs";
 import { pickDivineReason } from "./reasons.mjs";
-import { getPlayers, getSession, grantCount, heroPointsOf, intervalMs, updateSession } from "./session.mjs";
+import { divineGrantsEnabled, getPlayers, getSession, grantCount, heroPointsOf, intervalMs, updateSession } from "./session.mjs";
 
 const HERO_POINTS_PATH = "system.resources.heroPoints.value";
 
@@ -28,7 +28,7 @@ export async function startSession() {
   await updateSession({
     active: true,
     number: number + 1,
-    nextGrantAt: Date.now() + intervalMs(),
+    nextGrantAt: divineGrantsEnabled() ? Date.now() + intervalMs() : null,
     pausedRemaining: null,
     gifts: {},
     log: []

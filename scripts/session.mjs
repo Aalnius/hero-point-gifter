@@ -42,6 +42,7 @@ export async function updateSession(updates) {
 
 export const giftLimit = () => game.settings.get(MODULE_ID, "giftsPerSession");
 export const intervalMs = () => game.settings.get(MODULE_ID, "grantIntervalMinutes") * 60_000;
+export const divineGrantsEnabled = () => game.settings.get(MODULE_ID, "divineGrants");
 export const grantCount = () => game.settings.get(MODULE_ID, "grantsPerInterval");
 
 /** @returns {{value: number, max: number}} PF2e hero point resource of an actor. */

@@ -2,7 +2,7 @@ import { MODULE_ID, TAB_ID, TEMPLATES } from "./constants.mjs";
 import { HeroPointTab } from "./apps/hero-point-tab.mjs";
 import { activateSocket } from "./gift.mjs";
 import { syncScheduler } from "./scheduler.mjs";
-import { getSession, intervalMs, updateSession } from "./session.mjs";
+import { divineGrantsEnabled, getSession, intervalMs, updateSession } from "./session.mjs";
 import { registerSettings } from "./settings.mjs";
 
 const refreshTab = foundry.utils.debounce(() => ui[TAB_ID]?.render(), 100);
@@ -30,12 +30,21 @@ Hooks.once("init", () => {
     onIntervalChange: async () => {
       // Restart the countdown from now with the new interval. Only the active GM writes the session.
       const { active, pausedRemaining } = getSession();
-      if (!active || game.user !== game.users.activeGM) return;
+      if (!active || !divineGrantsEnabled() || game.user !== game.users.activeGM) return;
       await updateSession(pausedRemaining == null
         ? { nextGrantAt: Date.now() + intervalMs() }
         : { pausedRemaining: intervalMs() });
     },
-    onLimitChange: refreshTab
+    onLimitChange: refreshTab,
+    onDivineGrantsChange: async () => {
+      refreshTab();
+      if (!getSession().active || game.user !== game.users.activeGM) return;
+      // Switching on starts a fresh countdown; switching off clears the timer. Either write re-syncs everyone.
+      await updateSession({
+        nextGrantAt: divineGrantsEnabled() ? Date.now() + intervalMs() : null,
+        pausedRemaining: null
+      });
+    }
   });
 
   // Register the sidebar tab: Sidebar#TABS describes the tab button, CONFIG.ui supplies the application.

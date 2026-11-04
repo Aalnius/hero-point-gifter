@@ -1,7 +1,7 @@
 import { MAX_REASON_LENGTH, TAB_ID, TEMPLATES } from "../constants.mjs";
 import { endSession, giveHeroPoint, resetGift, setSessionNumber, startSession, takeHeroPoint } from "../actions.mjs";
 import { giftBlockReason, requestGift } from "../gift.mjs";
-import { getPlayers, getSession, giftLimit, heroPointsOf } from "../session.mjs";
+import { divineGrantsEnabled, getPlayers, getSession, giftLimit, heroPointsOf } from "../session.mjs";
 
 const { ApplicationV2, DialogV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const { AbstractSidebarTab } = foundry.applications.sidebar;
@@ -50,8 +50,9 @@ export class HeroPointTab extends HandlebarsApplicationMixin(AbstractSidebarTab)
     context.statusLabel = session.active
       ? game.i18n.format("HPG.Session.Active", { number: session.number })
       : game.i18n.localize("HPG.Session.Inactive");
-    context.nextGrantAt = session.active ? session.nextGrantAt : null;
-    context.timerPaused = session.active && session.pausedRemaining != null;
+    const timed = session.active && divineGrantsEnabled();
+    context.nextGrantAt = timed ? session.nextGrantAt : null;
+    context.timerPaused = timed && session.pausedRemaining != null;
     context.ownGifted = (session.gifts[game.user.id] ?? 0) >= limit;
 
     context.players = getPlayers().map(user => {

@@ -9,5 +9,6 @@
 - GM controls to add or remove hero points and to set the session number.
 - Random funny reason when a gift is sent without one.
 - Login reminder toast for GMs when no session is active.
+- Setting to turn divine grants off entirely.
 - Optional setting to end the session once the GM has left (off by default).
 - Divine grants on the timer add a random funny or god-themed reason to the chat card (can be turned off).

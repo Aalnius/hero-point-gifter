@@ -4,7 +4,7 @@ A Foundry VTT module for the **Pathfinder 2e** system that adds a **Hero Points*
 
 - **Players** can gift one hero point per session to another player, with an optional reason. Leave the reason blank and the Gods pick a funny one.
 - **GMs** start and end sessions, can correct the session number, and can add or remove hero points on any character at any time.
-- **Divine grants:** while a session is active, the Gods grant a hero point to random players below their maximum on a timer. The timer is saved in the world, so it survives reloads and a GM going offline.
+- **Divine grants:** while a session is active, the Gods grant a hero point to random players below their maximum on a timer. The timer is saved in the world, so it survives reloads and a GM going offline. They can be switched off in the settings.
 - The divine grant timer pauses while no players are online and resumes where it left off.
 - Everything is posted to chat as themed cards.
 
@@ -59,6 +59,7 @@ A short reminder toast appears when a GM logs in without an active session. It c
 
 | Setting | Default | Scope |
 | --- | --- | --- |
+| Enable Divine Grants | On | World |
 | Divine Grant Interval (minutes) | 60 | World |
 | Players Granted Per Interval | 2 | World |
 | Gifts Per Player Per Session | 1 | World |

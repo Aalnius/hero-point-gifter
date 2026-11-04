@@ -7,13 +7,24 @@ import { SessionModel } from "./session.mjs";
  * @param {() => void} handlers.onSessionChange   The session state changed.
  * @param {() => void} handlers.onIntervalChange  The divine grant interval changed.
  * @param {() => void} handlers.onLimitChange     The per-session gift limit changed.
+ * @param {() => void} handlers.onDivineGrantsChange  Divine grants were switched on or off.
  */
-export function registerSettings({ onSessionChange, onIntervalChange, onLimitChange }) {
+export function registerSettings({ onSessionChange, onIntervalChange, onLimitChange, onDivineGrantsChange }) {
   game.settings.register(MODULE_ID, "session", {
     scope: "world",
     config: false,
     type: SessionModel,
     onChange: onSessionChange
+  });
+
+  game.settings.register(MODULE_ID, "divineGrants", {
+    name: "HPG.Settings.DivineGrantsName",
+    hint: "HPG.Settings.DivineGrantsHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+    onChange: onDivineGrantsChange
   });
 
   game.settings.register(MODULE_ID, "grantIntervalMinutes", {

@@ -1,5 +1,5 @@
 import { grantRandomHeroPoints } from "./actions.mjs";
-import { getPlayers, getSession, intervalMs, updateSession } from "./session.mjs";
+import { divineGrantsEnabled, getPlayers, getSession, intervalMs, updateSession } from "./session.mjs";
 
 /** setTimeout cannot exceed a signed 32-bit integer of milliseconds. */
 const MAX_DELAY = 2 ** 31 - 1;
@@ -18,7 +18,7 @@ export async function syncScheduler() {
   clearTimeout(timeout);
   timeout = null;
 
-  if (game.user !== game.users.activeGM) return;
+  if (game.user !== game.users.activeGM || !divineGrantsEnabled()) return;
   const { active, nextGrantAt, pausedRemaining } = getSession();
   if (!active) return;
 
@@ -37,7 +37,7 @@ export async function syncScheduler() {
 
 async function fire() {
   timeout = null;
-  if (game.user !== game.users.activeGM || !getSession().active) return;
+  if (game.user !== game.users.activeGM || !divineGrantsEnabled() || !getSession().active) return;
   await grantRandomHeroPoints();
   await updateSession({ nextGrantAt: Date.now() + intervalMs() });
 }
